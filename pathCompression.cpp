@@ -15,16 +15,11 @@ void makeSet(Node* element) {
 }
 
 
-int find_set(int v) {
-    if (v == parent[v])
-        return v;
-    return parent[v] = find_set(parent[v]);
-}
 
 Node* findSet(Node* element) {
     if (element == element -> parent)
         return element;    
-    element -> parent = findSet(element -> parent);
+    return element -> parent = findSet(element -> parent);
 }
 
 void unionSet(Node* element1, Node* element2){
