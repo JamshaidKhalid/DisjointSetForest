@@ -14,6 +14,8 @@ void makeSet(Node* element) {
 	element -> parent = element;
     element -> rank = 0;
 }
+
+
 // Return root for set given an element, using path compression if
 // pathCompression is true
 Node* findSet(Node* element, bool pathCompression) {
@@ -29,7 +31,10 @@ Node* findSet(Node* element, bool pathCompression) {
         	return element;    
     	return findSet(element -> parent, false);
 	}
+	return nullptr;
 }
+
+
 // Take the union of two sets given an element from each set. Both union by
 // rank and path compression heuristics can be used or not used.
 void unionSet(Node* element1, Node* element2, bool unionByRank,	bool pathCompression) {
@@ -66,7 +71,7 @@ void printAllElements(std::vector<Node*> elements);
 
 int main()
 {
-	bool unionByRank = false, pathCompression = true;
+	bool unionByRank = false, pathCompression = false;
 
 	// Test for correctness of functionality
 	int numElements = 5;
