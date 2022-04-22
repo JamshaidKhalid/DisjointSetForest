@@ -1,6 +1,6 @@
 // disjointSetForest.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+#include <bits/stdc++.h>
 class Node {
 public:
 	int value = 0;
@@ -10,20 +10,63 @@ public:
 };
 
 // Create a set given a single element
-void makeSet(Node* element);
+void makeSet(Node* element) {
+	element -> parent = element;
+    element -> rank = 0;
+}
 // Return root for set given an element, using path compression if
 // pathCompression is true
-Node* findSet(Node* element, bool pathCompression);
+Node* findSet(Node* element, bool pathCompression) {
+	if(pathCompression) {
+		if (element == element -> parent)
+        	return element;    
+    	return element -> parent = findSet(element -> parent, true);
+	}
+
+
+	if(!pathCompression) {
+		if (element == element -> parent)
+        	return element;    
+    	return findSet(element -> parent, false);
+	}
+}
 // Take the union of two sets given an element from each set. Both union by
 // rank and path compression heuristics can be used or not used.
-void unionSet(Node* element1, Node* element2, bool unionByRank,
-	bool pathCompression);
+void unionSet(Node* element1, Node* element2, bool unionByRank,	bool pathCompression) {
+	if(unionByRank) {
+		element1 = findSet(element1, pathCompression);
+    	element2 = findSet(element2, pathCompression);
+
+    	if(element1 != element2) {
+        	if(element1->rank < element2->rank)
+            	std::swap(element1, element2);
+        	element1->parent = element2;
+
+        	if(element1->rank == element2->rank)
+            	element1->rank++;
+    	}
+	}
+
+	if(pathCompression) {
+		element1 = findSet(element1, true);
+		element2 = findSet(element2, true);
+	}
+	else {
+		element1 = findSet(element1, false);
+		element2 = findSet(element2, false);
+	}
+
+	
+	if(element1 != element2) {
+		element1 -> parent = element2;
+	}
+}
 
 void printAllElements(std::vector<Node*> elements);
 
 int main()
 {
-	bool unionByRank = true, pathCompression = true;
+	bool unionByRank = false, pathCompression = true;
 
 	// Test for correctness of functionality
 	int numElements = 5;
