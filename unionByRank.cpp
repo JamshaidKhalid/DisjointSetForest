@@ -12,7 +12,6 @@ public:
 
 void makeSet(Node* element) {
 	element -> parent = element;
-    element -> rank = 0;
 }
 
 
