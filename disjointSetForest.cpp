@@ -1,18 +1,16 @@
 // disjointSetForest.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-#include <bits/stdc++.h>
+
 class Node {
 public:
 	int value = 0;
 	int rank = 0;
-//	Node* parent = nullptr;
+	Node* parent = nullptr;
 	Node(int value) { this->value = value; }
 };
 
 // Create a set given a single element
-void makeSet(Node* element) {
-		
-}
+void makeSet(Node* element);
 // Return root for set given an element, using path compression if
 // pathCompression is true
 Node* findSet(Node* element, bool pathCompression);
@@ -58,7 +56,7 @@ void printAllElements(std::vector<Node*> elements) {
 	for (int i = 0; i < elements.size(); i++) {
 		// Print element and its set representative (should be same as element)
 		std::cout << elements.at(i)->value << "  "
-//			<< elements.at(i)->parent->value << "  "
+			<< elements.at(i)->parent->value << "  "
 			<< findSet(elements.at(i), false)->value << std::endl;
 	}
 }
