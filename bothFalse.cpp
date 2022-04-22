@@ -18,7 +18,7 @@ void makeSet(Node* element) {
 Node* findSet(Node* element) {
     if (element == element -> parent)
         return element;    
-    element -> parent = findSet(element -> parent);
+    return findSet(element -> parent);
 }
 
 void unionSet(Node* element1, Node* element2){
